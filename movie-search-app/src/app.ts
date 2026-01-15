@@ -11,8 +11,18 @@ export function createApp() {
   const app = express();
   app.disable("x-powered-by");
 
-  app.use(helmet());
   app.use(httpLogger);
+
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          "img-src": ["'self'", "data:", "https://image.tmdb.org"],
+        },
+      },
+    })
+  );
 
   app.use(
     rateLimit({
