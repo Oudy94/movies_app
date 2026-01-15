@@ -22,4 +22,6 @@ export const env = {
   TMDB_BASE_URL: requireEnvString("TMDB_BASE_URL"),
   TMDB_ACCESS_TOKEN: requireEnvString("TMDB_ACCESS_TOKEN"),
   TMDB_LANGUAGE: requireEnvString("TMDB_LANGUAGE"),
+  CACHE_TTL_SECONDS: requireEnvInt("CACHE_TTL_SECONDS"),
+  CACHE_MAX_ITEMS: requireEnvInt("CACHE_MAX_ITEMS")
 };
