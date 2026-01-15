@@ -5,12 +5,14 @@ import rateLimit from "express-rate-limit";
 import { apiRouter } from "./api/routes/index.js";
 import { notFound } from "./api/middlewares/notFound.js";
 import { errorHandler } from "./api/middlewares/errorHandler.js";
+import { httpLogger } from "./api/middlewares/httpLogger.js";
 
 export function createApp() {
   const app = express();
   app.disable("x-powered-by");
 
   app.use(helmet());
+  app.use(httpLogger);
 
   app.use(
     rateLimit({

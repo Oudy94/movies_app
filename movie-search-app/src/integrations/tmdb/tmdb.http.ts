@@ -1,5 +1,6 @@
 import { env } from "../../config/env.js";
 import { ApiError } from "../../api/utils/ApiError.js";
+import { logger } from "../../shared/logger.js";
 
 function buildUrl(path: string, params: Record<string, unknown> = {}) {
   const url = new URL(env.TMDB_BASE_URL + path);
@@ -16,6 +17,7 @@ export async function tmdbGet(path: string, params: Record<string, unknown> = {}
 
   try {
     const url = buildUrl(path, { language: env.TMDB_LANGUAGE, ...params });
+    logger.debug({ path, params }, "TMDB request");
 
     const res = await fetch(url, {
       method: "GET",
@@ -30,7 +32,7 @@ export async function tmdbGet(path: string, params: Record<string, unknown> = {}
     const json = text ? JSON.parse(text) : null;
 
     if (!res.ok) {
-      console.error("TMDB error:", res.status, json);
+      logger.warn({ status: res.status, path }, "TMDB request failed");
       throw ApiError.upstream("TMDB request failed");
     }
 
