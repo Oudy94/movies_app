@@ -1,17 +1,25 @@
-function must(name: string): string {
+function requireEnvString(name: string): string {
   const v = process.env[name];
-  if (!v || !String(v).trim()) throw new Error(`Missing env var: ${name}`);
+  if (!v || !String(v).trim()) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
   return String(v).trim();
 }
 
-function opt(name: string, fallback: string): string {
-  const v = process.env[name];
-  return v && String(v).trim() ? String(v).trim() : fallback;
+function requireEnvInt(name: string): number {
+  const raw = requireEnvString(name);
+  const n = Number(raw);
+
+  if (!Number.isFinite(n) || !Number.isInteger(n)) {
+    throw new Error(`Environment variable ${name} must be an integer. Got: "${raw}"`);
+  }
+
+  return n;
 }
 
 export const env = {
-  PORT: Number(opt("PORT", "3000")),
-  TMDB_BASE_URL: opt("TMDB_BASE_URL", "https://api.themoviedb.org/3"),
-  TMDB_ACCESS_TOKEN: must("TMDB_ACCESS_TOKEN"),
-  TMDB_LANGUAGE: opt("TMDB_LANGUAGE", "en-US")
+  PORT: requireEnvInt("PORT"),
+  TMDB_BASE_URL: requireEnvString("TMDB_BASE_URL"),
+  TMDB_ACCESS_TOKEN: requireEnvString("TMDB_ACCESS_TOKEN"),
+  TMDB_LANGUAGE: requireEnvString("TMDB_LANGUAGE"),
 };
