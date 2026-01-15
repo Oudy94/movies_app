@@ -1,5 +1,5 @@
 import express from "express";
-import { moviesRouter } from "../../modules/movies/movies.routes.js";
+import { moviesRouter } from "../../modules/movies/api/movies.routes";
 
 export const apiRouter = express.Router();
 

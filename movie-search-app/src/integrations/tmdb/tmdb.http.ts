@@ -1,6 +1,6 @@
-import { env } from "../../config/env.js";
-import { ApiError } from "../../api/utils/ApiError.js";
-import { logger } from "../../shared/logger.js";
+import { env } from "../../config/env";
+import { ApiError } from "../../api/utils/ApiError";
+import { logger } from "../../shared/logger";
 
 function buildUrl(path: string, params: Record<string, unknown> = {}) {
   const url = new URL(env.TMDB_BASE_URL + path);

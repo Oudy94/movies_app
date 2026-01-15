@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { searchMoviesService, movieDetailsService } from "./movies.service.js";
+import { searchMoviesService, movieDetailsService } from "../core/movies.service";
 
 export async function search(req: Request, res: Response, next: NextFunction) {
   try {

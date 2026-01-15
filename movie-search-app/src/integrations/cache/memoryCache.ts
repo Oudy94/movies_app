@@ -1,5 +1,5 @@
 import { LRUCache } from "lru-cache";
-import { env } from "../../config/env.js";
+import { env } from "../../config/env";
 
 const cache = new LRUCache<string, any>({
   max: env.CACHE_MAX_ITEMS,

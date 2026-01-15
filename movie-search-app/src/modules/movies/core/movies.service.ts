@@ -1,7 +1,7 @@
-import { searchMovies, getMovieDetails } from "./movies.tmdb.js";
-import { mapSearchResponse, mapDetails } from "./movies.mapper.js";
-import { getCache, setCache } from "../../integrations/cache/memoryCache.js";
-import type { MovieSearchResponseDto, MovieDetailsDto } from "./movies.dto.js";
+import { searchMovies, getMovieDetails } from "../integrations/movies.tmdb";
+import { mapSearchResponse, mapDetails } from "./movies.mapper";
+import { getCache, setCache } from "../../../integrations/cache/memoryCache";
+import type { MovieSearchResponseDto, MovieDetailsDto } from "./movies.dto";
 
 export async function searchMoviesService(input: { query: string; page?: number }): Promise<MovieSearchResponseDto> {
   const page = input.page ?? 1;

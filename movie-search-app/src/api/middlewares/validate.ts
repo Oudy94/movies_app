@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { ApiError } from "../utils/ApiError.js";
+import { ApiError } from "../utils/ApiError";
 import type { ZodSchema } from "zod";
 
 export function validateQuery(schema: ZodSchema) {

@@ -2,10 +2,10 @@ import express from "express";
 import path from "path";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import { apiRouter } from "./api/routes/index.js";
-import { notFound } from "./api/middlewares/notFound.js";
-import { errorHandler } from "./api/middlewares/errorHandler.js";
-import { httpLogger } from "./api/middlewares/httpLogger.js";
+import { apiRouter } from "./api/routes/index";
+import { notFound } from "./api/middlewares/notFound";
+import { errorHandler } from "./api/middlewares/errorHandler";
+import { httpLogger } from "./api/middlewares/httpLogger";
 
 export function createApp() {
   const app = express();

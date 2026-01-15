@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { ApiError } from "../utils/ApiError.js";
+import { ApiError } from "../utils/ApiError";
 
 export function errorHandler(err: unknown, req: Request, res: Response, next: NextFunction) {
   const e = err instanceof ApiError ? err : new ApiError(500, "INTERNAL_ERROR", "Unexpected error");

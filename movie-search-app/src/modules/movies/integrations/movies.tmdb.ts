@@ -1,4 +1,4 @@
-import { tmdbGet } from "../../integrations/tmdb/tmdb.http.js";
+import { tmdbGet } from "../../../integrations/tmdb/tmdb.http";
 
 export async function searchMovies(input: { query: string; page?: number }) {
   return tmdbGet("/search/movie", input);
