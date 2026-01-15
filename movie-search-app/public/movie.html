@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="link" href="/" aria-label="Back to search">← Back</a>
+      <div class="brand brand--small">
+        <div class="brand__logo">🎬</div>
+        <div class="brand__text">
+          <div class="brand__title" id="movieTitleTop">Movie</div>
+          <div class="brand__subtitle">Details</div>
+        </div>
+      </div>
+      <div></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="movieStatus" class="muted mt-16"></div>
+
+    <section class="details" id="detailsWrap" hidden>
+      <div class="details__poster">
+        <img id="poster" alt="Poster" />
+      </div>
+
+      <div class="details__content">
+        <h1 id="title" class="details__title">—</h1>
+
+        <div class="chips" id="chips"></div>
+
+        <div class="infoGrid">
+          <div class="infoItem">
+            <div class="label">Release date</div>
+            <div class="value" id="releaseDate">—</div>
+          </div>
+          <div class="infoItem">
+            <div class="label">Runtime</div>
+            <div class="value" id="runtime">—</div>
+          </div>
+          <div class="infoItem">
+            <div class="label">Rating</div>
+            <div class="value" id="rating">—</div>
+          </div>
+          <div class="infoItem">
+            <div class="label">Homepage</div>
+            <div class="value"><a id="homepage" class="link" target="_blank" rel="noreferrer">—</a></div>
+          </div>
+        </div>
+
+        <div class="card mt-16">
+          <div class="card__title">Overview</div>
+          <p id="overview" class="card__body">—</p>
+        </div>
+
+        <div class="card mt-16" id="trailersCard" hidden>
+          <div class="card__title">Trailers</div>
+          <div id="trailers" class="list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/movie.js" defer></script>
+</body>
+</html>
