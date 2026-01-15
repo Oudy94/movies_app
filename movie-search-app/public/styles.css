@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 24px auto;
+}
+
+input {
+  width: 380px;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 12px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+pre {
+  background: #f6f6f6;
+  padding: 12px;
+  border-radius: 8px;
+  overflow: auto;
+}

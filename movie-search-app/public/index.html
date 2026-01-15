@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>TMDB Movie Search</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <h1>TMDB Movie Search</h1>
+
+  <div class="row">
+    <input id="q" placeholder="Type movie title..." />
+    <button id="btn">Search</button>
+  </div>
+
+  <div id="results"></div>
+  <h3>Details</h3>
+  <pre id="details">{}</pre>
+
+  <script>
+    const q = document.getElementById("q");
+    const btn = document.getElementById("btn");
+    const results = document.getElementById("results");
+    const details = document.getElementById("details");
+
+    async function search() {
+      const query = q.value.trim();
+      if (!query) return;
+
+      results.innerHTML = "Loading...";
+      details.textContent = "{}";
+
+      const r = await fetch(`/api/movies/search?query=${encodeURIComponent(query)}`);
+      const data = await r.json();
+
+      if (!r.ok) {
+        results.innerHTML = `<p style="color:red">${data.error?.message || "Error"}</p>`;
+        return;
+      }
+
+      results.innerHTML = "";
+      data.items.forEach(m => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.textContent = `${m.title} (${m.releaseDate || "n/a"})`;
+        div.onclick = () => loadDetails(m.id);
+        results.appendChild(div);
+      });
+    }
+
+    async function loadDetails(id) {
+      const r = await fetch(`/api/movies/${id}`);
+      const data = await r.json();
+      details.textContent = JSON.stringify(data, null, 2);
+    }
+
+    btn.onclick = search;
+    q.addEventListener("keydown", (e) => { if (e.key === "Enter") search(); });
+  </script>
+</body>
+</html>
