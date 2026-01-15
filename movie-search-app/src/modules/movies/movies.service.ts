@@ -1,25 +1,31 @@
 import { searchMovies, getMovieDetails } from "./movies.tmdb.js";
 import { mapSearchResponse, mapDetails } from "./movies.mapper.js";
 import { getCache, setCache } from "../../integrations/cache/memoryCache.js";
+import type { MovieSearchResponseDto, MovieDetailsDto } from "./movies.dto.js";
 
-export async function searchMoviesService(input: { query: string; page?: number }) {
-  const key = `movies:search:${input.query.toLowerCase()}:page:${input.page || 1}`;
-  const cached = getCache<ReturnType<typeof mapSearchResponse>>(key);
+export async function searchMoviesService(input: { query: string; page?: number }): Promise<MovieSearchResponseDto> {
+  const page = input.page ?? 1;
+  const key = `movies:search:${input.query.toLowerCase()}:page:${page}`;
+
+  const cached = getCache<MovieSearchResponseDto>(key);
   if (cached) return cached;
 
-  const tmdb = await searchMovies(input);
+  const tmdb = await searchMovies({ ...input, page });
   const data = mapSearchResponse(tmdb);
-  setCache(key, data);
+
+  setCache<MovieSearchResponseDto>(key, data);
   return data;
 }
 
-export async function movieDetailsService(id: number) {
+export async function movieDetailsService(id: number): Promise<MovieDetailsDto> {
   const key = `movies:details:${id}`;
-  const cached = getCache<ReturnType<typeof mapDetails>>(key);
+
+  const cached = getCache<MovieDetailsDto>(key);
   if (cached) return cached;
 
   const tmdb = await getMovieDetails(id);
   const data = mapDetails(tmdb);
-  setCache(key, data);
+
+  setCache<MovieDetailsDto>(key, data);
   return data;
 }
