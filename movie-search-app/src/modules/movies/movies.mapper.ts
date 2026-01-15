@@ -17,3 +17,19 @@ export function mapSearchResponse(tmdb: any) {
     items
   };
 }
+
+export function mapDetails(tmdb: any) {
+  return {
+    id: tmdb?.id,
+    title: tmdb?.title || tmdb?.original_title || "",
+    releaseDate: tmdb?.release_date || null,
+    overview: tmdb?.overview || "",
+    runtimeMinutes: tmdb?.runtime ?? null,
+    genres: Array.isArray(tmdb?.genres) ? tmdb.genres.map((g: any) => g.name) : [],
+    rating: typeof tmdb?.vote_average === "number" ? tmdb.vote_average : null,
+    homepage: tmdb?.homepage || null,
+    videos: Array.isArray(tmdb?.videos?.results)
+      ? tmdb.videos.results.map((v: any) => ({ name: v.name, site: v.site, key: v.key, type: v.type }))
+      : []
+  };
+}
